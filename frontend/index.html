@@ -49,6 +49,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <script src="https://cdn.jsdelivr.net/npm/@reown/appkit-adapter-ethers@1.8.21/dist/appkit-adapter-ethers.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script><script>
+const PROJECT_ID = 'ee6081d44f535b82b71aa2003badb2b7'; // AppKit project ID — wired for BOT Chain 677
+
 const ABI=['function createLoanRequest(uint256 amount,uint256 interestBps,uint256 duration) payable returns (uint256)','function fundLoan(uint256 id) payable','function repayLoan(uint256 id) payable','function defaultLoan(uint256 id)'];
 const D=86400,now=()=>Math.floor(Date.now()/1000);
 let loans=[{id:1,who:'0x7a3…c91e',amt:500,rate:12,days:30,st:0,due:0},{id:2,who:'0x19f…02ab',amt:1200,rate:9,days:60,st:1,due:now()+20*D},{id:3,who:'0xb40…77d0',amt:300,rate:20,days:14,st:1,due:now()-2*D},{id:4,who:'0xe21…5a6c',amt:80,rate:6,days:7,st:2,due:0},{id:5,who:'0x5d8…ff13',amt:2500,rate:15,days:90,st:0,due:0}];
