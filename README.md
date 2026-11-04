@@ -4,7 +4,7 @@ Request a loan, provide funding, and repay on-chain.
 
 ## Mainnet status
 
-Mainnet deployment is pending. The interface does not simulate transactions or balances.
+Contract on BOT Chain mainnet (677): [0x2fdd5117fb93Acbe4f4e72667fA86Bf2827dA5F1](https://scan.botchain.ai/address/0x2fdd5117fb93Acbe4f4e72667fA86Bf2827dA5F1).
 
 Wallet actions require BOT Chain mainnet, deployed bytecode, and a connected compatible wallet. Every action is simulated before a transaction review; only a subsequent wallet confirmation can send it.
 
@@ -19,12 +19,12 @@ Wallet actions require BOT Chain mainnet, deployed bytecode, and a connected com
 
 ## Contract interface
 
-`frontend/product.json` uses the ABI compiled from the current Solidity source.
+`frontend/product.json` uses the current-source ABI, matched against the deployed mainnet runtime bytecode. Explorer source publication is tracked separately.
 
 | Action | Contract signature |
 |---|---|
 | Request a loan | `createLoanRequest(uint256,uint256,uint256)` |
-| Mark a default (owner only) | `defaultLoan(uint256)` |
+| Mark a default | `defaultLoan(uint256)` |
 | Fund a loan | `fundLoan(uint256)` |
 | Repay your loan | `repayLoan(uint256)` |
 

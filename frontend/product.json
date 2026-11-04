@@ -1,9 +1,9 @@
 {
-  "abiSource": "pending-current-source",
+  "abiSource": "runtime-matched-current-source",
   "repo": "shakehand-lending",
   "brand": "Shakehand Lending",
   "summary": "Request a loan, provide funding, and repay on-chain.",
-  "address": null,
+  "address": "0x2fdd5117fb93Acbe4f4e72667fA86Bf2827dA5F1",
   "owner": null,
   "abi": [
     {
