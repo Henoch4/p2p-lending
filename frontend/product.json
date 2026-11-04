@@ -1,0 +1,469 @@
+{
+  "abiSource": "pending-current-source",
+  "repo": "shakehand-lending",
+  "brand": "Shakehand Lending",
+  "summary": "Request a loan, provide funding, and repay on-chain.",
+  "address": null,
+  "owner": null,
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "borrower",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "principal",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rate",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "duration",
+          "type": "uint256"
+        }
+      ],
+      "name": "LoanCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "borrower",
+          "type": "address"
+        }
+      ],
+      "name": "LoanDefaulted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "LoanFunded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "borrower",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "LoanRepaid",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "borrowerLoans",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "principal",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "interestRateBps",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "durationSeconds",
+          "type": "uint256"
+        }
+      ],
+      "name": "createLoanRequest",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        }
+      ],
+      "name": "defaultLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "defaulted",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        }
+      ],
+      "name": "fundLoan",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        }
+      ],
+      "name": "getLoan",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "borrower",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "principal",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "duration",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalRepay",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "repaid",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "lenderLoans",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "loanCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "loans",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "borrower",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "lender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "principal",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "interestRateBps",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "durationSeconds",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalRepay",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "repaid",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "lid",
+          "type": "uint256"
+        }
+      ],
+      "name": "repayLoan",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "writes": [
+    {
+      "name": "createLoanRequest",
+      "signature": "createLoanRequest(uint256,uint256,uint256)",
+      "title": "Request a loan",
+      "admin": false,
+      "actor": null
+    },
+    {
+      "name": "defaultLoan",
+      "signature": "defaultLoan(uint256)",
+      "title": "Mark a default",
+      "admin": false,
+      "rule": [
+        "getLoan",
+        [
+          "lender"
+        ]
+      ],
+      "actor": null
+    },
+    {
+      "name": "fundLoan",
+      "signature": "fundLoan(uint256)",
+      "title": "Fund a loan",
+      "admin": false,
+      "actor": null
+    },
+    {
+      "name": "repayLoan",
+      "signature": "repayLoan(uint256)",
+      "title": "Repay your loan",
+      "admin": false,
+      "rule": [
+        "getLoan",
+        [
+          "borrower"
+        ]
+      ],
+      "actor": null
+    }
+  ],
+  "money": [
+    "createLoanRequest.principal"
+  ],
+  "idBase": 0,
+  "layout": 0,
+  "legacy": null,
+  "readOnlyReason": null
+}

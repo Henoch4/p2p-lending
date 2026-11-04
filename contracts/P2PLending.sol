@@ -35,6 +35,7 @@ contract P2PLending is ReentrancyGuard, Ownable {
     mapping(address => uint256[]) public borrowerLoans;
     mapping(address => uint256[]) public lenderLoans;
     uint256 public loanCount;
+    mapping(uint256=>bool) public defaulted;
 
     event LoanCreated(uint256 indexed lid, address indexed borrower, address indexed lender, uint256 principal, uint256 rate, uint256 duration);
     event LoanFunded(uint256 indexed lid, address indexed lender, uint256 amount);
@@ -92,6 +93,7 @@ contract P2PLending is ReentrancyGuard, Ownable {
         require(msg.value == l.totalRepay, "Incorrect repayment amount");
         l.repaid = true;
         l.active = false;
+        defaulted[lid] = false;
         // FIX: call{value} instead of transfer — clears the ledger entry and
         // moves principal+interest to the lender in one direct repay send.
         (bool ok, ) = payable(l.lender).call{value: msg.value}("");
@@ -99,13 +101,14 @@ contract P2PLending is ReentrancyGuard, Ownable {
         emit LoanRepaid(lid, msg.sender, msg.value);
     }
 
-    function defaultLoan(uint256 lid) external onlyOwner {
+    function defaultLoan(uint256 lid) external {
         Loan storage l = loans[lid];
         require(!l.repaid, "Already repaid");
         require(l.lender != address(0), "Not funded");
+        require(msg.sender==l.lender&&l.active,"Not lender or already defaulted");
         require(block.timestamp >= l.startTime + l.durationSeconds, "Not yet due");
         l.active = false;
-        l.repaid = true;
+        defaulted[lid] = true;
         emit LoanDefaulted(lid, l.borrower);
     }
 
